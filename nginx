@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
+wget -P ~/Downloads/ http://nginx.org/download/nginx-1.13.6.tar.gz						// 1.13.6 - latest stable version 
+wget -P ~/Downloads/ https://github.com/arut/nginx-rtmp-module/archive/master.zip
+cd ~/Downloads 
+tar -zxvf nginx-1.13.1.tar.gz
+unzip master.zip
+cd nginx-1.13.1
+./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
+make
+sudo make install
+cat  << 'EOF' >> /usr/local/nginx/conf/nginx.conf 			
+rtmp {
+        server {
+                listen 1935;
+                chunk_size 4096;
+
+                application live {
+                        live on;
+                        record off;
+                }
+        }
+}
+EOF
+sudo /usr/local/nginx/sbin/nginx 			//nginx start
