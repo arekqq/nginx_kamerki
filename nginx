@@ -22,4 +22,7 @@ rtmp {
         }
 }
 EOF
+sudo apt install monit
+sudo cp /etc/monit/conf-available/nginx /etc/monit/conf-enabled
+sudo monit reload
 sudo /usr/local/nginx/sbin/nginx 			//nginx start
