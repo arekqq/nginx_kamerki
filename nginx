@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev -y
 wget -P ~/Downloads/ http://nginx.org/download/nginx-1.13.6.tar.gz						// 1.13.6 - latest stable version 
 wget -P ~/Downloads/ https://github.com/arut/nginx-rtmp-module/archive/master.zip
 cd ~/Downloads 
