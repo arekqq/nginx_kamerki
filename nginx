@@ -25,6 +25,7 @@ rtmp {
                 }
         }
 }
+pid		logs/nginx.pid;
 EOF
 sudo apt install monit
 sudo cp /etc/monit/conf-available/nginx /etc/monit/conf-enabled
