@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+set -e 		#exit immediately if a command exits with a non-zero status
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev -y
-wget  http://nginx.org/download/nginx-1.13.6.tar.gz						# 1.13.6 - latest stable version 
+nginx_latest_stable_ver='nginx-1.13.6.tar.gz'						# 1.13.6 - latest stable version 
+wget  http://nginx.org/download/$nginx_latest_stable_ver						# 1.13.6 - latest stable version 
 wget  https://github.com/arut/nginx-rtmp-module/archive/master.zip
-tar -zxvf nginx-1.13.1.tar.gz
+tar -zxvf nginx-1.13.6.tar.gz
 unzip master.zip
 cd nginx-1.13.1
 ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
@@ -24,6 +26,5 @@ rtmp {
 EOF
 sudo apt install monit
 sudo cp /etc/monit/conf-available/nginx /etc/monit/conf-enabled
-
 sudo /usr/local/nginx/sbin/nginx 			#nginx start
 sudo monit reload
