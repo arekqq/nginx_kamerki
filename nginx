@@ -3,8 +3,8 @@ set -e 		#exit immediately if a command exits with a non-zero status
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install unzip unattended-upgrades iotop iftop dstat
 sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev -y
-latest_stable_ver="nginx-1.13.6.tar.gz"						# 1.13.6 - latest stable version 
-wget -O ${latest_stable_ver} http://nginx.org/download/${latest_stable_ver}				# 1.13.6 - latest stable version 28.10.2017
+latest_stable_ver="nginx-1.13.6.tar.gz"						# 1.13.6 - latest stable version 28.10.2017
+wget -O ${latest_stable_ver} http://nginx.org/download/${latest_stable_ver}				
 module_name="master.zip"
 wget -O ${module_name} https://github.com/arut/nginx-rtmp-module/archive/${module_name}
 tar -zxvf ${latest_stable_ver}
@@ -27,9 +27,9 @@ rtmp {
 }
 pid		logs/nginx.pid;
 EOF
-
-
-#### monit part
+####################
+#### monit part ####
+####################
 sudo apt-get install monit
 sudo cat  << 'EOF' > /etc/monit/conf-enabled/nginx			
  check process nginx with pidfile /usr/local/nginx/logs/nginx.pid
@@ -40,3 +40,4 @@ sudo cat  << 'EOF' > /etc/monit/conf-enabled/nginx
    if 5 restarts with 5 cycles then timeout
 EOF
 sudo monit reload					#contains nginx start
+update-rc.d monit defaults
