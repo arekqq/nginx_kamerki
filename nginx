@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 set -e 		#exit immediately if a command exits with a non-zero status
 sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install unzip unattended-upgrades iotop iftop dstat
 sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev -y
 latest_stable_ver="nginx-1.13.6.tar.gz"						# 1.13.6 - latest stable version 
-wget  http://nginx.org/download/${latest_stable_ver}						# 1.13.6 - latest stable version 
-wget  https://github.com/arut/nginx-rtmp-module/archive/master.zip
-tar -zxvf nginx-1.13.6.tar.gz
-unzip master.zip
-cd nginx-1.13.1
+wget -O ${latest_stable_ver} http://nginx.org/download/${latest_stable_ver}				# 1.13.6 - latest stable version 28.10.2017
+module_name="master.zip"
+wget -O ${module_name} https://github.com/arut/nginx-rtmp-module/archive/${module_name}
+tar -zxvf ${latest_stable_ver}
+unzip ${module_name}
+cd ${latest_stable_ver}
 ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
 make
 sudo make install
