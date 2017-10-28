@@ -11,7 +11,7 @@ cd nginx-1.13.1
 ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
 make
 sudo make install
-cat  << 'EOF' >> /usr/local/nginx/conf/nginx.conf 			
+sudo cat  << 'EOF' >> /usr/local/nginx/conf/nginx.conf 			
 rtmp {
         server {
                 listen 1935;
@@ -26,5 +26,4 @@ rtmp {
 EOF
 sudo apt install monit
 sudo cp /etc/monit/conf-available/nginx /etc/monit/conf-enabled
-sudo /usr/local/nginx/sbin/nginx 			#nginx start
-sudo monit reload
+sudo monit reload 			#contained nginx start
