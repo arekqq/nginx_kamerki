@@ -2,8 +2,8 @@
 set -e 		#exit immediately if a command exits with a non-zero status
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev -y
-nginx_latest_stable_ver='nginx-1.13.6.tar.gz'						# 1.13.6 - latest stable version 
-wget  http://nginx.org/download/$nginx_latest_stable_ver						# 1.13.6 - latest stable version 
+latest_stable_ver="nginx-1.13.6.tar.gz"						# 1.13.6 - latest stable version 
+wget  http://nginx.org/download/${latest_stable_ver}						# 1.13.6 - latest stable version 
 wget  https://github.com/arut/nginx-rtmp-module/archive/master.zip
 tar -zxvf nginx-1.13.6.tar.gz
 unzip master.zip
