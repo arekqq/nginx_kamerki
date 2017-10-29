@@ -24,6 +24,9 @@ rtmp {
                         record off;
                 }
         }
+        allow play 192.168.0.0/24;
+        allow play 192.168.135.10/24;
+        deny play all;
 }
 pid		logs/nginx.pid;
 EOF
